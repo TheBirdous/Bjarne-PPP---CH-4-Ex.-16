@@ -1,11 +1,12 @@
 #include "../../std_lib_facilities.h"
 
-int get_mode(vector<int> set)
+string get_mode(vector<string> set)
 {
 	sort(set);
 	int tracker = 1;
 	int most_reocc = tracker;
-	int most_reocc_num = tracker;
+	string most_reocc_string = " ";
+	vector<int> set_MC;
 
 	for (int i = 1; i < set.size(); i++)
 	{
@@ -19,14 +20,13 @@ int get_mode(vector<int> set)
 		}
 		if (tracker > most_reocc)
 		{
-			most_reocc_num = set[i];
 			most_reocc = tracker;
+			most_reocc_string = set[i];
 		}
-
 	}
 	
-	cout << "The number has reoccoured most (" << most_reocc << ") times, is: ";
-	return most_reocc_num; 
+	cout << "The string has reoccoured most (" << most_reocc << ") times, is: ";
+	return most_reocc_string; 
 	
 }
 
@@ -36,15 +36,28 @@ int get_mode(vector<int> set)
 
 int main()
 {
-	vector<int> numbers;
-	int input = 0;
-
+	vector<string> strings;
+	string input = " ";
+	string biggest = " ";
+	string smallest = " ";
+	bool is_first = true;
 	while (cin >> input)
 	{
-		numbers.push_back(input);
+		if (input < smallest || is_first == true)
+		{
+			smallest = input;
+		}
+		if (input > biggest || is_first == true)
+		{
+			biggest = input;
+		}
+		is_first = false;
+		strings.push_back(input);
+
 	}
 
-	cout << get_mode(numbers) << '\n';
-
+	cout << get_mode(strings) << '\n';
+	cout << "The biggest string entered is: " << biggest << '\n';
+	cout << "The smallest string entered is: " << smallest << '\n';
 	keep_window_open();
 }
